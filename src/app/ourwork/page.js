@@ -1,10 +1,12 @@
 'use client'
 import React from 'react';
-import Contact from '@/app/Component/Contact';
+import About1 from '@/app/Component/About1';
+import Navbar from '@/app/Component/Navbar';
 const Component = () => {
   return (
     <div>
-<Contact/>
+<Navbar home={false}/>
+<About1/>
     </div>
   );
 };

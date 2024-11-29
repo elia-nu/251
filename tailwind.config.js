@@ -43,6 +43,7 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
         'thin': ['Poppins-Thin', 'sans-serif'],
+        'roboto-slab': ['Roboto Slab', 'serif'],
       },
     },
   },

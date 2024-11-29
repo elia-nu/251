@@ -2,120 +2,220 @@
 import { motion } from 'framer-motion';
 import useInView from '../hooks/useInView';
 import Image from 'next/image';
-
-const partners = [
+import Marquee from 'react-fast-marquee';
+import { useState, useEffect } from 'react';
+const PARTNERS = [
     {
-        name: "Cobuilt",
-        logo: "/cobuilt.png",
-        category: "Construction"
+        name: "MTN",
+        logo: "https://251communications.com/static/media/Clients%20logo%201-29.22cdf37164d1601cef3a.png",
     },
     {
-        name: "Simport", 
-        logo: "/Simport.png",
-        category: "Import/Export"
-    },
-   
-    {
-        name: "Sara",
-        logo: "/Ssara.png",
-        category: "Manufacturing"
+        name: "Coca Cola", 
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Coca-Cola_bottle_cap.svg/1200px-Coca-Cola_bottle_cap.svg.png",
     },
     {
-        name: "Awash",
-        logo: "/Awash.png",
-        category: "Banking"
+        name: "USAID",
+        logo: "https://251communications.com/static/media/Clients%20logo%201-03.a17d6c9617475f1591df.png", 
     },
     {
-        name: "Ambo",
-        logo: "/Awater.png",
-        category: "Beverages"
+        name: "Western Union",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Western_Union_Logo_2019.svg/2560px-Western_Union_Logo_2019.svg.png",
     },
     {
-        name: "Steel",
-        logo: "/Asteel.png",
-        category: "Manufacturing"
+        name: "VISA",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png",
     },
     {
-        name: "Shawi",
-        logo: "/Shawi.png",
-        category: "Retail"
+        name: "UNDP",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/UNDP_logo.svg/2560px-UNDP_logo.svg.png",
     },
     {
-        name: "Salt",
-        logo: "/SaltSD.png",
-        category: "Mining"
+        name: "DHL",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/DHL_Logo.svg/2560px-DHL_Logo.svg.png",
+    },
+    {
+        name: "UNICEF",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/UNICEF_Logo.svg/2560px-UNICEF_Logo.svg.png",
+    },
+    {
+        name: "Nokia",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nokia_wordmark.svg/2560px-Nokia_wordmark.svg.png",
+    },
+    {
+        name: "Nestle",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nestl%C3%A9_logo.svg/2560px-Nestl%C3%A9_logo.svg.png",
+    },
+    {
+        name: "HP",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/HP_New_Logo_2D.svg/2048px-HP_New_Logo_2D.svg.png",
+    },
+    {
+        name: "Huawei",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Huawei_Logo.svg/2560px-Huawei_Logo.svg.png",
+    },
+    {
+        name: "Emirates",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Emirates_logo.svg/2560px-Emirates_logo.svg.png",
+    },
+    {
+        name: "Safaricom",
+        logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Safaricom_logo.svg/1200px-Safaricom_logo.svg.png",
     }
 ];
 
+// Split partners into groups based on screen size
+const usePartnerGroups = () => {
+    const [groups, setGroups] = useState({
+        group1: [],
+        group2: [],
+        group3: []
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            const partnersPerGroup = Math.ceil(PARTNERS.length / 3);
+            setGroups({
+                group1: PARTNERS.slice(0, partnersPerGroup),
+                group2: PARTNERS.slice(partnersPerGroup, partnersPerGroup * 2),
+                group3: PARTNERS.slice(partnersPerGroup * 2)
+            });
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return groups;
+};
+
 const Partner = () => {
     const [setRef, isInView] = useInView({ threshold: 0.1 });
+    const { group1, group2, group3 } = usePartnerGroups();
+    const [speed, setSpeed] = useState(50);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 640) {
+                setSpeed(30);
+            } else if (window.innerWidth < 1024) {
+                setSpeed(40);
+            } else {
+                setSpeed(50);
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
-        <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-teal-900 to-slate-900 overflow-hidden">
-            {/* Animated background elements */}
-            <div className="absolute inset-0">
-                <div className="absolute w-[40rem] h-[40rem] -top-48 -left-48 bg-teal-500/20 rounded-full blur-[100px] animate-pulse"/>
-                <div className="absolute w-[40rem] h-[40rem] -bottom-48 -right-48 bg-blue-500/20 rounded-full blur-[100px] animate-pulse"/>
-            </div>
-
-            <div className="relative container mx-auto px-4 py-20">
-                <motion.div
-                    ref={setRef}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center space-y-8 mb-16"
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gradient-to-b from-black to-gray-900 text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center items-center"
+        >
+            <div className="mx-auto w-full max-w-7xl">
+                {/* Section Header */}
+                <motion.div 
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7 }}
+                    className="text-center mb-16"
                 >
-                    <motion.span 
-                        className="inline-flex items-center px-6 py-2 rounded-full text-sm font-medium bg-teal-400/20 text-teal-300"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
-                        transition={{ delay: 0.2 }}
-                    >
-                        🤝 Trusted Partners
-                    </motion.span>
-
-                    <h1 className="text-4xl lg:text-6xl font-bold text-white">
-                        <span className="bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                            Growing Stronger
+                    <h2 className="text-5xl md:text-7xl font-extrabold mb-4">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+                            WHY WE ARE
                         </span>
-                        <br />
-                        <span className="text-white">Together</span>
-                    </h1>
-
-                    <p className="text-gray-300 text-xl max-w-3xl mx-auto">
-                        Collaborating with industry leaders to revolutionize transportation across Ethiopia
+                    </h2>
+                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                        Trusted by leading brands worldwide
                     </p>
                 </motion.div>
+    
+                {/* Partners Marquee */}
+                <div className="space-y-8 overflow-hidden w-full transform -skew-y-[12deg] py-12  ">
+                    <Marquee gradient={false} speed={speed} direction="left" className="py-4">
+                        {PARTNERS.map((partner, index) => (
+                            <motion.div 
+                                key={index}
+                                whileHover={{ scale: 1.1 }}
+                                className="mx-8 flex items-center justify-center"
+                            >
+                                <img 
+                                    src={partner.logo} 
+                                    alt={partner.name}
+                                    className="h-12 md:h-16 w-auto filter brightness-300 invert opacity-70 hover:opacity-100 transition-all duration-300"
+                                />
+                            </motion.div>
+                        ))}
+                    </Marquee>
 
+                    <Marquee gradient={false} speed={speed * 0.8} direction="right" className="py-4">
+                        {PARTNERS.map((partner, index) => (
+                            <motion.div 
+                                key={index}
+                                whileHover={{ scale: 1.1 }}
+                                className="mx-8 flex items-center justify-center"
+                            >
+                                <img 
+                                    src={partner.logo} 
+                                    alt={partner.name}
+                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
+                                />
+                            </motion.div>
+                        ))}
+                    </Marquee>
+
+                    <Marquee gradient={false} speed={speed * 1.2} direction="left" className="py-4">
+                        {PARTNERS.map((partner, index) => (
+                            <motion.div 
+                                key={index}
+                                whileHover={{ scale: 1.1 }}
+                                className="mx-8 flex items-center justify-center"
+                            >
+                                <img 
+                                    src={partner.logo} 
+                                    alt={partner.name}
+                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
+                                />
+                            </motion.div>
+                        ))}
+                    </Marquee>
+                </div>
+    
+                {/* "ALIVE" text at bottom */}
                 <motion.div 
-                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isInView ? 1 : 0 }}
-                    transition={{ delay: 0.4, staggerChildren: 0.1 }}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.3 }}
+                    className="text-center mt-16"
                 >
-                    {partners.map((partner, index) => (
-                        <motion.div
-                            key={index}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 flex flex-col items-center justify-center group transition-all duration-300 hover:bg-white/20 border border-white/10"
+                    <h3 className="text-6xl md:text-8xl font-black tracking-wider">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400/20 to-yellow-600/20">
+                            ALIVE
+                        </span>
+                        <motion.svg 
+                            animate={{ 
+                                scale: [1, 1.2, 1, 1.2, 1],
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="inline-block w-16 h-16 ml-4 text-yellow-500" 
+                            fill="currentColor" 
+                            viewBox="0 0 24 24"
                         >
-                            <Image 
-                                src={partner.logo} 
-                                alt={partner.name}
-                                className="h-16 md:h-20 object-contain filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-all duration-300"
-                                width={500}
-                                height={300}
-                            />
-                            <div className="mt-4 text-center">
-                                <h3 className="text-white font-semibold">{partner.name}</h3>
-                                <p className="text-teal-400 text-sm">{partner.category}</p>
-                            </div>
-                        </motion.div>
-                    ))}
+                            <path d="M12 4.248C8.852-1.154 0 .423 0 7.192 0 11.853 5.571 16.619 12 23c6.43-6.381 12-11.147 12-15.808C24 .4 15.125-1.114 12 4.248z"/>
+                        </motion.svg>
+                    </h3>
                 </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

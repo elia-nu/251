@@ -1,10 +1,12 @@
 'use client'
 import React from 'react';
-import About1 from '@/app/Component/About1';
+import Career from '@/app/Component/Career';
+import Navbar from '@/app/Component/Navbar';
 const Component = () => {
   return (
     <div>
-<About1/>
+      <Navbar home={false}/>
+<Career/>
     </div>
   );
 };
