@@ -9,126 +9,129 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useInView from "../hooks/useInView";
 import Image from 'next/image';
+import Navbar from "./Navbar";
 
-const Contac = () => {
+const Contact = () => {
   const [setRef, isInView] = useInView({ threshold: 0.1 });
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        staggerChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="relative min-h-screen bg-white py-8 md:py-16">
-      <div className="relative container mx-auto px-3 md:px-4">
-        <motion.div
-          ref={setRef}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-          transition={{ duration: 0.8 }}
-          className="text-center space-y-4 md:space-y-6 mb-8 md:mb-16"
-        >
-          <motion.span
-            className="inline-flex items-center px-3 md:px-4 py-1.5 rounded-full text-sm font-medium bg-teal-500/10 text-teal-600"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
-            transition={{ delay: 0.2 }}
+    <div className="relative min-h-screen bg-white py-12 md:py-20 bg-cover bg-center overflow-hidden flex flex-col items-center justify-center pt-40" 
+         style={{backgroundImage: 'url("https://251communications.com/static/media/contact-img.e09f745bf9874682e82e.png")'}}>
+      <Navbar />
+      <div className="absolute top-0 left-0 w-full h-full backdrop-blur-md bg-gradient-to-b from-black/50 to-black/70">
+      </div>
+
+      <motion.div 
+        className="container mx-auto px-6 relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        ref={setRef}
+      >
+        <div className="flex flex-col md:flex-row gap-16 items-center justify-between max-w-7xl mx-auto">
+          {/* Left side - Contact Info */}
+          <motion.div 
+            className="text-white md:w-1/2"
+            variants={itemVariants}
           >
-            📞 Get in Touch
-          </motion.span>
+            <div className="text-9xl flex flex-col items-start justify-center">
+              <h1 className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-white to-yellow-400 bg-clip-text text-transparent leading-tight">
+                NOW WE'RE TALKING
+              </h1>
+              <span className="text-5xl md:text-7xl text-yellow-500 font-bold">&gt;</span>
+            </div>
+            <div className="space-y-8 mt-12">
+              <motion.div 
+                className="flex items-center gap-6 hover:translate-x-2 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/30">
+                  <FontAwesomeIcon icon={faLocationDot} className="w-7 h-7" />
+                </div>
+                <p className="text-xl font-light">Aster plaza 3rd floor, Meskel flower Bole</p>
+              </motion.div>
+              <motion.div 
+                className="flex items-center gap-6 hover:translate-x-2 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/30">
+                  <FontAwesomeIcon icon={faPhone} className="w-7 h-7" />
+                </div>
+                <p className="text-xl font-light">+251116650182</p>
+              </motion.div>
+              <motion.div 
+                className="flex items-center gap-6 hover:translate-x-2 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/30">
+                  <FontAwesomeIcon icon={faEnvelope} className="w-7 h-7" />
+                </div>
+                <p className="text-xl font-light">info@251communications.com</p>
+              </motion.div>
+            </div>
+          </motion.div>
 
-          <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold">
-            <span className="text-teal-600">Ready to Connect?</span>
-            <br />
-            <span className="text-gray-800">We&apos;re Here for You</span>
-          </h1>
-
-          <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto px-3">
-            Whether you have questions, feedback, or need assistance, our team
-            is ready to help make your journey better.
-          </p>
-        </motion.div>
-
-        <div className="flex flex-col lg:flex-row justify-center items-start gap-6 lg:gap-8">
-          <div className="flex flex-col md:flex-row lg:flex-col justify-between gap-4 md:gap-6 w-full lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-              transition={{ delay: 0.3 }}
-              className="group bg-teal-50 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex-1"
-            >
-              <ContactCard
-                icon={faLocationDot}
-                title="Our Location"
-                details={["Addis Abeba, Ethiopia"]}
-                gradient="from-teal-500 to-teal-600"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-              transition={{ delay: 0.4 }}
-              className="group bg-teal-50 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex-1"
-            >
-              <ContactCard
-                icon={faPhone}
-                title="Call Center"
-                details={["+8787", "+251112175045", "+251147086682"]}
-                gradient="from-teal-500 to-teal-600"
-              />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-              transition={{ delay: 0.5 }}
-              className="group bg-teal-50 rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex-1"
-            >
-              <ContactCard
-                icon={faEnvelope}
-                title="Email Support"
-                details={["gotripsupport@africatechnology.et"]}
-                gradient="from-teal-500 to-teal-600"
-              />
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
-            transition={{ delay: 0.6 }}
-            className="w-full lg:w-1/2"
+          {/* Right side - Contact Form */}
+          <motion.div 
+            className="md:w-1/2 w-full"
+            variants={itemVariants}
           >
-            <div className="flex justify-center">
-              <Image
-                src="/conc.png"
-                alt="Contact Illustration"
-                className="w-full max-w-xl rounded-2xl shadow-lg"
-                width={400}
-                height={240}
-              />
+            <div className="bg-white/15 backdrop-blur-lg p-10 rounded-3xl border border-white/30 shadow-2xl">
+              <h2 className="text-white text-4xl font-bold mb-8">Contact Us Today</h2>
+              <form className="space-y-6">
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full p-4 rounded-xl bg-white/90 focus:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-800 placeholder-gray-500"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    className="w-full p-4 rounded-xl bg-white/90 focus:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-800 placeholder-gray-500"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    placeholder="Your Message"
+                    rows="5"
+                    className="w-full p-4 rounded-xl bg-white/90 focus:bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-800 placeholder-gray-500 resize-none"
+                  />
+                </div>
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 25px -5px rgb(234 179 8 / 0.4)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-4 px-8 rounded-xl font-bold text-lg hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-xl hover:shadow-yellow-500/50"
+                >
+                  REQUEST A CALL BACK
+                </motion.button>
+              </form>
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
-const ContactCard = ({ icon, title, details, gradient }) => {
-  return (
-    <div className="flex flex-col items-center text-center space-y-3">
-      <div
-        className={`w-10 h-10 md:w-14 md:h-14 bg-gradient-to-br ${gradient} rounded-xl flex items-center justify-center text-white text-lg md:text-xl transform group-hover:scale-110 transition-transform duration-300`}
-      >
-        <FontAwesomeIcon icon={icon} />
-      </div>
-      <h3 className="text-base md:text-lg font-bold text-teal-800">{title}</h3>
-      <div className="flex flex-col gap-1.5">
-        {details.map((detail, index) => (
-          <p key={index} className="text-xs md:text-sm text-teal-600">
-            <FontAwesomeIcon icon={faPhone} className="text-teal-600 mr-1.5" /> {detail}
-          </p>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Contac;
+export default Contact;
