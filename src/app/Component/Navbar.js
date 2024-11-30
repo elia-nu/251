@@ -103,38 +103,38 @@ const Navbar = ({ home = false }) => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 bg-black/80 rounded-lg mt-2">
               <a
-                href="#"
+                href="/"
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
                 Home
               </a>
               <a
-                href="#"
+                href="/services"
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
-                Product
+                Services
               </a>
               <a
-                href="#"
+                href="/ourwork"
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
                 Our Work
               </a>
               <a
-                href="#"
+                href="/events"
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
-                Pages
+                Events
               </a>
               <a
-                href="#"
+                href="/career"
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
                 Career
               </a>
-              <button className="w-full bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-600 transition-colors mt-2 text-base">
+              <a href="/contact" className="block w-full bg-yellow-400 text-black px-6 py-2 rounded-full hover:bg-yellow-600 transition-colors mt-2 text-base text-center">
                 Contact Us
-              </button>
+              </a>
             </div>
           </div>
         </div>
