@@ -12,8 +12,8 @@ const Navbar = ({ home = false }) => {
  
 
   return (
-    <nav className={`font-roboto-slab w-full  z-50  overflow-hidden ${home ? 'fixed top-0 left-0' : 'absolute top-0 left-0'}`}>
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6  ${home ? 'lg:px-8 pt-4 sm:pt-8 md:pt-12 lg:pt-20' : ' p-12 '}`}>
+    <nav className={`font-roboto-slab w-full  z-50  overflow-hidden ${home ? 'absolute top-0 left-0  backdrop-blur-sm' : 'absolute top-0 left-0'}`}>
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6  ${home ? 'lg:px-8 pt-4 sm:pt-4 md:pt-8 lg:pt-16 pb-4' : ' p-12 '}`}>
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
@@ -78,6 +78,12 @@ const Navbar = ({ home = false }) => {
                 Events
               </a>
               <a
+                href="/news"
+                className="text-yellow-400 hover:text-yellow-600 transition-colors duration-300 hover:scale-110 text-sm lg:text-base"
+              >
+                News
+              </a>
+              <a
                 href="/career"
                 className="text-yellow-400 hover:text-yellow-600 transition-colors duration-300 hover:scale-110 text-sm lg:text-base"
               >
@@ -125,6 +131,12 @@ const Navbar = ({ home = false }) => {
                 className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
               >
                 Events
+              </a>
+              <a
+                href="/news"
+                className="block text-yellow-400 hover:bg-yellow-600 hover:text-white px-3 py-2 rounded-md text-base"
+              >
+                News
               </a>
               <a
                 href="/career"

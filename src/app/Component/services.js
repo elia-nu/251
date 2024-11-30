@@ -8,13 +8,13 @@ const Services = () => {
     return (
         <>
             <Navbar home={true}/>
-            <div className="relative min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#333333] text-white pt-20 overflow-hidden">
+            <div className="relative min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#333333]  text-white pt-40 overflow-hidden">
                 {/* Animated Background Elements */}
                 <div className="absolute inset-0 overflow-hidden">
                     {[...Array(15)].map((_, i) => (
                         <motion.div
                             key={i}
-                            className="absolute w-24 h-24 bg-gradient-to-br from-[#00cc60]/20 to-[#00cc60]/20"
+                            className="absolute w-24 h-24 bg-gradient-to-br from-yellow-400/20 to-yellow-400/20"
                             style={{
                                 left: `${Math.random() * 100}%`,
                                 top: `${Math.random() * 100}%`,
@@ -55,15 +55,16 @@ const Services = () => {
                                 transition={{ delay: index * 0.2 }}
                                 className="bg-[#1a1a1a]/50 backdrop-blur-lg rounded-xl p-6 hover:bg-[#1a1a1a]/70 transition-all duration-300"
                             >
-                                <div className="w-12 h-12 bg-[#00cc60] rounded-lg mb-4 flex items-center justify-center">
+                                <div className="w-12 h-12 bg-yellow-400 rounded-lg mb-4 flex items-center justify-center">
                                     {service.icon}
                                 </div>
-                                <h3 className="text-xl font-semibold mb-3 text-[#00cc60]">{service.title}</h3>
+                                <h3 className="text-xl font-semibold mb-3 text-yellow-400">{service.title}</h3>
                                 <p className="text-gray-300">{service.description}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
+                
             </div>
         </>
     );

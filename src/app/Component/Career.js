@@ -34,7 +34,7 @@ const Career = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className='text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-white tracking-tight'
+                    className='text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-6 sm:mb-8 md:mb-10 text-white tracking-tight mt-20'
                 >
                     Welcome To <span className='text-yellow-400'>251 COMMUNICATIONS</span>
                 </motion.h1>
