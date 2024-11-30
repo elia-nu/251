@@ -53,7 +53,7 @@ const Contact = () => {
           >
             <div className="text-9xl flex flex-col items-start justify-center">
               <h1 className="text-6xl md:text-8xl font-black mb-4 bg-gradient-to-r from-white to-yellow-400 bg-clip-text text-transparent leading-tight">
-                NOW WE'RE TALKING
+                NOW WE&apos;RE TALKING
               </h1>
               <span className="text-5xl md:text-7xl text-yellow-500 font-bold">&gt;</span>
             </div>
