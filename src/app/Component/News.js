@@ -47,7 +47,7 @@ const News = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#333333] text-white relative">
+        <div className=" bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#333333] text-white relative">
             <div className="absolute inset-0 overflow-hidden">
                 {[...Array(30)].map((_, i) => (
                     <motion.div
