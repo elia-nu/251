@@ -1,12 +1,12 @@
 'use client'
 import React, { useState } from 'react';
 import useInView from '../hooks/useInView';
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 
 const Team = () => {
     const [heroRef, isHeroInView] = useInView({ threshold: 0.1 });
     const [selectedMember, setSelectedMember] = useState(null);
-
+    const { scrollY } = useScroll();
     const TEAM_MEMBERS = [
         {
           name: "John Doe", 
@@ -92,8 +92,8 @@ const Team = () => {
       <motion.div 
                 className="absolute top-[30%] right-20 z-0 bg-gradient-to-br from-yellow-400 to-yellow-900 h-40 w-40 rounded-full blur-xl"
                 animate={{
-                    y: [scrollY * 0.1, -scrollY * 0.1, scrollY * 0.1], // Adjust y based on scroll
-                    x: [scrollY * 0.15, -scrollY * 0.15, scrollY * 0.15], // Adjust x based on scroll
+                    y: [0, -20, 0],
+                    x: [0, -20, 0],
                     scale: [1, 1.2, 1],
                 }}
                 transition={{
@@ -106,9 +106,9 @@ const Team = () => {
             <motion.div 
                 className="absolute top-[50%] left-0 z-0 bg-gradient-to-br from-yellow-400 to-yellow-900 h-40 w-40 rounded-full blur-xl"
                 animate={{
-                    y: [-scrollY * 0.1, scrollY * 0.1, -scrollY * 0.1], // Adjust y based on scroll
-                    x: [scrollY * 0.05, -scrollY * 0.05, scrollY * 0.05], // Adjust x based on scroll
-                    scale: [1.2, 1, 1.2],
+                    y: [0, -20, 0],
+                    x: [0, -20, 0],
+                    scale: [1, 1.2, 1],
                 }}
                 transition={{
                     duration: 7,
