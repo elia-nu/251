@@ -29,7 +29,32 @@ const Career = () => {
 
     return (
         <>
-            <div className='container mx-auto px-4 sm:px-6 lg:px-8  sm:pt-24 md:pt-32 pb-16 relative z-10 pt-40'>
+        <div className='relative'>
+            <div className='container mx-auto px-4 sm:px-6 lg:px-8  sm:pt-24 md:pt-32 pb-16  z-10 pt-40'>
+            <div className="absolute inset-0 overflow-hidden">
+                {[...Array(30)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute w-24 h-24 bg-gradient-to-br from-yellow-400/20 to-yellow-400/20"
+                        style={{
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                            borderRadius: '50%',
+                        }}
+                        animate={{
+                            y: [0, -20, 0],
+                            opacity: [0.2, 0.4, 0.2],
+                            scale: [1, 1.1, 1],
+                        }}
+                        transition={{
+                            duration: 4 + Math.random() * 2,
+                            repeat: Infinity,
+                            delay: Math.random() * 2,
+                        }}
+                    />
+                ))}
+            </div>
+         
                 <motion.h1 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -93,6 +118,7 @@ const Career = () => {
                     ))}
                 </div>
             </div>
+        </div>
         </>
     );
 };

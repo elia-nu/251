@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import Driver from "./Component/Driver";
 import HomePage from "./Component/HomePage.js";
-import About1 from "./Component/About1";
+import About1 from "./Component/Work";
 import './globals.css';
 
 export default function Home() {

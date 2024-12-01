@@ -1,9 +1,10 @@
 'use client'
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import useInView from '../hooks/useInView';
 import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
 const PARTNERS = [
     {
         name: "MTN",
@@ -63,156 +64,119 @@ const PARTNERS = [
     }
 ];
 
-// Split partners into groups based on screen size
-const usePartnerGroups = () => {
-    const [groups, setGroups] = useState({
-        group1: [],
-        group2: [],
-        group3: []
-    });
-
-    useEffect(() => {
-        const handleResize = () => {
-            const partnersPerGroup = Math.ceil(PARTNERS.length / 3);
-            setGroups({
-                group1: PARTNERS.slice(0, partnersPerGroup),
-                group2: PARTNERS.slice(partnersPerGroup, partnersPerGroup * 2),
-                group3: PARTNERS.slice(partnersPerGroup * 2)
-            });
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    return groups;
-};
-
 const Partner = () => {
     const [setRef, isInView] = useInView({ threshold: 0.1 });
-    const { group1, group2, group3 } = usePartnerGroups();
-    const [speed, setSpeed] = useState(50);
+    const containerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
 
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 640) {
-                setSpeed(30);
-            } else if (window.innerWidth < 1024) {
-                setSpeed(40);
-            } else {
-                setSpeed(50);
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
 
     return (
         <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-b from-black to-gray-900 text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center items-center"
+            ref={containerRef}
+            className="relative min-h-screen bg-[#0a0a0a] overflow-hidden"
         >
-            <div className="mx-auto w-full max-w-7xl">
-                {/* Section Header */}
+            {/* Animated Background */}
+            <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/5 via-transparent to-transparent" />
+                {[...Array(20)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute bg-yellow-500/10 rounded-full blur-3xl"
+                        style={{
+                            width: Math.random() * 400 + 100,
+                            height: Math.random() * 400 + 100,
+                            left: `${Math.random() * 100}%`,
+                            top: `${Math.random() * 100}%`,
+                        }}
+                        animate={{
+                            scale: [1, 1.2, 1],
+                            opacity: [0.1, 0.2, 0.1],
+                        }}
+                        transition={{
+                            duration: Math.random() * 5 + 5,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                    />
+                ))}
+            </div>
+
+            <div className="relative z-10 container mx-auto px-4 py-24">
+                {/* Header Section */}
                 <motion.div 
-                    initial={{ y: -50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.7 }}
-                    className="text-center mb-16"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-5xl md:text-7xl font-extrabold mb-4">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
-                            WHY WE ARE
-                        </span>
+                    <h2 className="text-7xl md:text-9xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600">
+                        PARTNERS
                     </h2>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                        Trusted by leading brands worldwide
+                    <p className="text-xl md:text-2xl text-yellow-100/60 max-w-2xl mx-auto font-light">
+                        Collaborating with global leaders to create extraordinary experiences
                     </p>
                 </motion.div>
-    
-                {/* Partners Marquee */}
-                <div className="space-y-8 overflow-hidden w-full transform -skew-y-[12deg] py-12  ">
-                    <Marquee gradient={false} speed={speed} direction="left" className="py-4">
-                        {PARTNERS.map((partner, index) => (
-                            <motion.div 
-                                key={index}
-                                whileHover={{ scale: 1.1 }}
-                                className="mx-8 flex items-center justify-center"
-                            >
-                                <img 
-                                    src={partner.logo} 
-                                    alt={partner.name}
-                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
-                                />
-                            </motion.div>
-                        ))}
-                    </Marquee>
 
-                    <Marquee gradient={false} speed={speed * 0.8} direction="right" className="py-4">
-                        {PARTNERS.map((partner, index) => (
-                            <motion.div 
-                                key={index}
-                                whileHover={{ scale: 1.1 }}
-                                className="mx-8 flex items-center justify-center"
-                            >
-                                <img 
-                                    src={partner.logo} 
-                                    alt={partner.name}
-                                    className="h-12 md:h-16 w-auto filter brightness-60 invert opacity-70 hover:opacity-100 transition-all duration-300"
-                                />
-                            </motion.div>
-                        ))}
-                    </Marquee>
-
-                    <Marquee gradient={false} speed={speed * 1.2} direction="left" className="py-4">
-                        {PARTNERS.map((partner, index) => (
-                            <motion.div 
-                                key={index}
-                                whileHover={{ scale: 1.1 }}
-                                className="mx-8 flex items-center justify-center"
-                            >
-                                <img 
-                                    src={partner.logo} 
-                                    alt={partner.name}
-                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
-                                />
-                            </motion.div>
-                        ))}
-                    </Marquee>
-                </div>
-    
-                {/* "ALIVE" text at bottom */}
+                {/* Partners Grid with Hover Effects */}
                 <motion.div 
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.7, delay: 0.3 }}
-                    className="text-center mt-16"
+                    style={{ y, opacity }}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12"
                 >
-                    <h3 className="text-6xl md:text-8xl font-black tracking-wider">
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400/20 to-yellow-600/20">
-                            ALIVE
-                        </span>
-                        <motion.svg 
+                    {PARTNERS.map((partner, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 }}
+                            whileHover={{ 
+                                scale: 1.1,
+                                filter: "brightness(1.2)",
+                            }}
+                            className="group relative bg-yellow-500/5 rounded-2xl p-8 backdrop-blur-sm border border-yellow-500/10 hover:border-yellow-500/30 transition-all duration-500"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/0 to-yellow-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                            <img 
+                                src={partner.logo}
+                                alt={partner.name}
+                                className="w-full h-20 object-contain filter brightness-0 invert opacity-50 group-hover:opacity-100 transition-all duration-500"
+                            />
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                whileHover={{ opacity: 1 }}
+                                className="absolute bottom-4 left-0 right-0 text-center text-yellow-500/70 text-sm"
+                            >
+                                {partner.name}
+                            </motion.div>
+                        </motion.div>
+                    ))}
+                </motion.div>
+
+                {/* Bottom Decorative Element */}
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="mt-20 text-center"
+                >
+                    <div className="inline-block p-4 rounded-full bg-yellow-500/10 backdrop-blur-sm">
+                        <motion.div
                             animate={{ 
-                                scale: [1, 1.2, 1, 1.2, 1],
+                                scale: [1, 1.2, 1],
+                                rotate: [0, 360]
                             }}
                             transition={{
-                                duration: 2,
+                                duration: 10,
                                 repeat: Infinity,
-                                ease: "easeInOut"
+                                ease: "linear"
                             }}
-                            className="inline-block w-16 h-16 ml-4 text-yellow-500" 
-                            fill="currentColor" 
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M12 4.248C8.852-1.154 0 .423 0 7.192 0 11.853 5.571 16.619 12 23c6.43-6.381 12-11.147 12-15.808C24 .4 15.125-1.114 12 4.248z"/>
-                        </motion.svg>
-                    </h3>
+                            className="w-12 h-12 border-2 border-yellow-500/30 rounded-full"
+                        />
+                    </div>
                 </motion.div>
             </div>
         </motion.div>

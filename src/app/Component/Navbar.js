@@ -22,7 +22,7 @@ const Navbar = ({ home = false }) => {
                 alt="Logo"
                 width={100}
                 height={100}
-                className="h-12 sm:h-16 md:h-20 w-auto hover:rotate-[720deg] transition-transform duration-1000"
+                className="h-12 sm:h-16 md:h-28 w-auto hover:rotate-[720deg] transition-transform duration-1000"
               />
             </div>
 

@@ -12,14 +12,6 @@ const Services = () => {
         <>
             <Navbar home={true}/>
             <div className="relative min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#333333] text-white pt-40 overflow-hidden">
-                <img src="https://251communications.com/static/media/Experential.7b84f039e3249ed0a770.png" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/Creatives.fb067fc0a3b38aecb671.png" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/digital.c9bb6e058cf2b14c9dd3.jpg" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/PR.3fc54baef9c1698fe188.jpg" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/production.6c1119875f66cd34a32d.jpg" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/Research.abdf476cc7724c6e4a9f.png" alt="services" className='w-full h-full object-cover' />
-                <img src="https://251communications.com/static/media/vas.118f2cdcdb42e905084f.png" alt="services" className='w-full h-full object-cover' />
-              
                 <div className="container mx-auto px-4 py-12 relative z-10">
                     <motion.div 
                         initial={{ opacity: 0, y: -20 }}
