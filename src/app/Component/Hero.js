@@ -67,7 +67,9 @@ const Hero = () => {
       <Services/>
 
      <Vision/>
-     <Team/>
+<div className="bg-black">
+<Team/>
+      </div>
 
    
     </>
@@ -82,13 +84,18 @@ const Services = () => {
 
   return (
     <>
-   <div className="relative z-20 py-40 md:py-40 bg-gradient-to-br from-black via-black to-black overflow-hidden">
-        <div className="container mx-auto px-4 md:px-8 relative">
+   <div className="relative z-20 py-16 md:py-24 bg-gradient-to-b from-black/90 via-black/90 to-black overflow-hidden">
+
+          <div className="container mx-auto px-4 md:px-8 relative">
           {/* Background decorative elements */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400 rounded-full blur-[500px]"></div>
-            <div className="absolute bottom-20 right-10 w-64 h-64 bg-yellow-600 rounded-full blur-[100px]"></div>
+            <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400 rounded-full blur-[100px]"></div>
+            <div className="absolute bottom-0 right-10 w-64 h-64 bg-yellow-600 rounded-full blur-[50px]"></div>
           </div>
+          <div className="absolute top-0 left-[0]  w-[80vh] h-96 bg-black  blur-[100px]"></div>
+          <div className="absolute bottom-20 right-[10%] -skew-x-12 w-[80vh] h-[200vh] bg-gray-900  blur-[100px]"></div>
+          <div className="absolute bottom-20 right-[40%] -skew-x-12 w-96 h-[200vh] bg-gray-900  blur-[100px] "></div>
+          <div className="absolute bottom-20 right-[50%] -skew-x-12 w-96 h-[200vh] bg-gray-900  blur-[1000px] "></div>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-16 relative">
             
@@ -147,7 +154,7 @@ const Services = () => {
                 </p>
                 
                 <p className="transform hover:translate-x-4 transition-all duration-500 hover:text-white">
-                  From ATL to BTL marketing strategies, we create end-to-end solutions that amplify our clients' 
+                  From ATL to BTL marketing strategies, we create end-to-end solutions that amplify our clients 
                   market presence through our extensive network of leading service and media partnerships.
                 </p>
               </motion.div>
@@ -216,7 +223,7 @@ const Vision = () => {
 
   return (
     <>
-      <div className=" bg-gradient-to-br from-black via-black via-gray-900 via-gray-900 to-black py-40 px-4 sm:px-6 lg:px-8">
+      <div className=" relative bg-gradient-to-br from-black via-black  to-black py-40 px-4 sm:px-6 lg:px-8 max-w-screen overflow-hidden">
         <div className="max-w-9xl mx-auto">
      
 

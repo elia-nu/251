@@ -13,7 +13,7 @@ import Footer from "./Footer";
 const HomePage = () => {
   return (
     <div className=" w-full" style={{ backgroundImage: "url('/go.jpg')" }}>
-      <div id="Home">
+      <div id="Home bg-black">
         <Hero />
       </div>
 
