@@ -15,7 +15,6 @@ const Services = () => {
                 <img src="https://251communications.com/static/media/Experential.7b84f039e3249ed0a770.png" alt="services" className='w-full h-full object-cover' />
                 <img src="/aa.png" alt="services" className='w-full h-full object-cover' />
                 
-                
                 <img src="https://251communications.com/static/media/Creatives.fb067fc0a3b38aecb671.png" alt="services" className='w-full h-full object-cover' />
                 <img src="https://251communications.com/static/media/digital.c9bb6e058cf2b14c9dd3.jpg" alt="services" className='w-full h-full object-cover' />
                 <img src="https://251communications.com/static/media/PR.3fc54baef9c1698fe188.jpg" alt="services" className='w-full h-full object-cover' />
