@@ -4,7 +4,6 @@ import useInView from '../hooks/useInView';
 import Image from 'next/image';
 import Marquee from 'react-fast-marquee';
 import { useState, useEffect } from 'react';
-
 const PARTNERS = [
     {
         name: "MTN",
@@ -64,6 +63,7 @@ const PARTNERS = [
     }
 ];
 
+// Split partners into groups based on screen size
 const usePartnerGroups = () => {
     const [groups, setGroups] = useState({
         group1: [],
@@ -110,86 +110,44 @@ const Partner = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                duration: 1,
-                staggerChildren: 0.2
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.5
-            }
-        }
-    };
-
     return (
         <motion.div 
-            initial="hidden"
-            animate="visible"
-            variants={containerVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className="bg-gradient-to-b from-black to-gray-900 text-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 min-h-screen flex flex-col justify-center items-center"
         >
             <div className="mx-auto w-full max-w-7xl">
                 {/* Section Header */}
                 <motion.div 
-                    variants={itemVariants}
-                    className="text-center mb-16 relative"
+                    initial={{ y: -50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7 }}
+                    className="text-center mb-16"
                 >
-                    <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="absolute h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 bottom-0 left-0"
-                    />
                     <h2 className="text-5xl md:text-7xl font-extrabold mb-4">
-                        <motion.span 
-                            className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600 inline-block"
-                            animate={{ 
-                                scale: [1, 1.05, 1],
-                                opacity: [0, 1]
-                            }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                        >
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
                             WHY WE ARE
-                        </motion.span>
+                        </span>
                     </h2>
-                    <motion.p 
-                        className="text-xl text-gray-300 max-w-2xl mx-auto"
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ delay: 0.7, duration: 0.5 }}
-                    >
+                    <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                         Trusted by leading brands worldwide
-                    </motion.p>
+                    </p>
                 </motion.div>
     
                 {/* Partners Marquee */}
-                <motion.div 
-                    variants={itemVariants}
-                    className="space-y-8 overflow-hidden w-full transform -skew-y-[12deg] py-12"
-                >
+                <div className="space-y-8 overflow-hidden w-full transform -skew-y-[12deg] py-12  ">
                     <Marquee gradient={false} speed={speed} direction="left" className="py-4">
                         {PARTNERS.map((partner, index) => (
                             <motion.div 
                                 key={index}
-                                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                                transition={{ duration: 0.3 }}
+                                whileHover={{ scale: 1.1 }}
                                 className="mx-8 flex items-center justify-center"
                             >
                                 <img 
                                     src={partner.logo} 
                                     alt={partner.name}
-                                    className="h-12 md:h-16 w-auto filter brightness-300 invert opacity-70 hover:opacity-100 transition-all duration-300"
+                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
                                 />
                             </motion.div>
                         ))}
@@ -199,14 +157,13 @@ const Partner = () => {
                         {PARTNERS.map((partner, index) => (
                             <motion.div 
                                 key={index}
-                                whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-                                transition={{ duration: 0.3 }}
+                                whileHover={{ scale: 1.1 }}
                                 className="mx-8 flex items-center justify-center"
                             >
                                 <img 
                                     src={partner.logo} 
                                     alt={partner.name}
-                                    className="h-12 md:h-16 w-auto filter brightness-0 invert opacity-70 hover:opacity-100 transition-all duration-300"
+                                    className="h-12 md:h-16 w-auto filter brightness-60 invert opacity-70 hover:opacity-100 transition-all duration-300"
                                 />
                             </motion.div>
                         ))}
@@ -216,8 +173,7 @@ const Partner = () => {
                         {PARTNERS.map((partner, index) => (
                             <motion.div 
                                 key={index}
-                                whileHover={{ scale: 1.1, rotate: [0, 5, -5, 0] }}
-                                transition={{ duration: 0.3 }}
+                                whileHover={{ scale: 1.1 }}
                                 className="mx-8 flex items-center justify-center"
                             >
                                 <img 
@@ -228,28 +184,22 @@ const Partner = () => {
                             </motion.div>
                         ))}
                     </Marquee>
-                </motion.div>
+                </div>
     
                 {/* "ALIVE" text at bottom */}
                 <motion.div 
-                    variants={itemVariants}
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.7, delay: 0.3 }}
                     className="text-center mt-16"
                 >
-                    <motion.h3 
-                        className="text-6xl md:text-8xl font-black tracking-wider"
-                        animate={{ 
-                            scale: [0.9, 1],
-                            opacity: [0, 1]
-                        }}
-                        transition={{ duration: 1, delay: 1 }}
-                    >
+                    <h3 className="text-6xl md:text-8xl font-black tracking-wider">
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400/20 to-yellow-600/20">
                             ALIVE
                         </span>
                         <motion.svg 
                             animate={{ 
                                 scale: [1, 1.2, 1, 1.2, 1],
-                                rotate: [0, 10, -10, 10, 0]
                             }}
                             transition={{
                                 duration: 2,
@@ -262,7 +212,7 @@ const Partner = () => {
                         >
                             <path d="M12 4.248C8.852-1.154 0 .423 0 7.192 0 11.853 5.571 16.619 12 23c6.43-6.381 12-11.147 12-15.808C24 .4 15.125-1.114 12 4.248z"/>
                         </motion.svg>
-                    </motion.h3>
+                    </h3>
                 </motion.div>
             </div>
         </motion.div>
