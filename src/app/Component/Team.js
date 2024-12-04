@@ -92,8 +92,8 @@ const Team = () => {
       <motion.div 
                 className="absolute top-[30%] right-20 z-0 bg-gradient-to-br from-yellow-400 to-yellow-900 h-40 w-40 rounded-full blur-xl"
                 animate={{
-                    y: [0, -20, 0],
-                    x: [0, -20, 0],
+                    y: [50, -20, 50],
+                    x: [50, -20, 50],
                     scale: [1, 1.2, 1],
                 }}
                 transition={{
@@ -106,8 +106,8 @@ const Team = () => {
             <motion.div 
                 className="absolute top-[50%] left-0 z-0 bg-gradient-to-br from-yellow-400 to-yellow-900 h-40 w-40 rounded-full blur-xl"
                 animate={{
-                    y: [0, -20, 0],
-                    x: [0, -20, 0],
+                    y: [50, -20, 50],
+                    x: [50, -20, 50],
                     scale: [1, 1.2, 1],
                 }}
                 transition={{

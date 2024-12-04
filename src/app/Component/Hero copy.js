@@ -50,26 +50,30 @@ const Hero = () => {
       
         <Navbar home={true} />
 
-        <div className="relative min-h-[60vh] md:min-h-screen text-white bg-white max-w-screen overflow-hidden">
+        <div className="relative min-h-[80vh] md:min-h-screen text-white bg-black max-w-screen overflow-hidden">
+          {/* Video Background with Overlay */}
           <div className="absolute top-0 left-0 w-full h-full">
+            <div className="absolute inset-0 bg-black/40 z-10"></div>
             <video
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-contain md:object-cover"
+              className="w-full h-full object-cover"
             >
               <source src="/hero-video.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
+
+          {/* Animated Gradient Orbs */}
           <motion.div
-            
-            className="absolute bottom-20 left-2 w-20 h-20 object-contain rounded-full bg-gradient-to-br from-yellow-400  to-yellow-900 md:hidden blur-xl"
+            className="absolute bottom-20 left-2 w-32 h-32 rounded-full bg-gradient-to-br from-yellow-400/60 to-yellow-900/60 blur-2xl"
             animate={{
               rotate: [-25, 25, -25],
-              y: [-25, 25, -25],
-              x: [-25, 25, -25],
+              y: [-35, 35, -35],
+              x: [-35, 35, -35],
+              scale: [1, 1.2, 1],
             }}
             transition={{
               duration: 8,
@@ -77,10 +81,35 @@ const Hero = () => {
               ease: "easeInOut"
             }}
           />
-           <img
-          src="https://251communications.com/static/media/home-text2.2a5ace97761bf4ab172b.png"
+
+          <motion.div
+            className="absolute top-1/4 right-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-yellow-500/30 to-orange-600/30 blur-3xl"
+            animate={{
+              rotate: [25, -25, 25],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Logo/Text Image with Enhanced Positioning and Animation */}
+          <motion.img
+            src="https://251communications.com/static/media/home-text2.2a5ace97761bf4ab172b.png"
             alt="Hero Image"
-            className="absolute bottom-2 right-2 w-40 h-40 object-contain "
+            className="absolute bottom-8 right-8 w-48 h-48 md:w-56 md:h-56 object-contain z-20"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut"
+            }}
+            whileHover={{
+              scale: 1.05,
+              transition: { duration: 0.2 }
+            }}
           />
         </div>
       </div>

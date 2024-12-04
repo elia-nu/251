@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Hero from "./Hero";
-import FeaturesSection from "./Features";
-import Link from "next/link";
-
-import Driver from "./Driver";
-import Customer from "./Customer";
-import About from "./About";
 import Partner from "./Partner";
-import Contac from "./Contac";
-import Team from "./Team";
-import Footer from "./Footer";
 const HomePage = () => {
   return (
     <div className=" w-full" style={{ backgroundImage: "url('/go.jpg')" }}>
